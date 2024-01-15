@@ -14,7 +14,7 @@ const Student = (props) => {
 
     const studentHandler = (event) => {
         event.preventDefault();
-        console.log(name,marks)
+        // console.log(name,marks)
         props.onAdd(name, marks)
         setName('')
         setMarks('')

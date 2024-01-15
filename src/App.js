@@ -1,35 +1,45 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import './App.css';
 import Student from './Components/Student';
 import StudentList from './Components/StudentList';
 
 function App() {
-  const [studentsList, setStudentList] = useState([])
+  
 
-  // const getLocalItem = () => {
-  //   let list = localStorage.getItem('list')
-  //   if(list){
-  //     return JSON.parse(localStorage.getItem('list'))
-  //   }
-  //   else{
-  //     return []
-  //   }
-  // }
-
-  const studentListHandler = (sName, sMarks) => {
-    
-    localStorage.setItem('list', JSON.stringify(studentsList))
-
-    setStudentList((prevList)=>{
-      return [...prevList, 
-        {studentName: sName, 
-          studentMarks: sMarks, 
-          id: Math.random().toString()
-        }]
-    })
+  const getLocalItem = () => {
+    let lists = localStorage.getItem('list')
+    console.log(lists)
+    if(lists){
+      return JSON.parse(localStorage.getItem('list'))
+    }
+    else{
+      return []
+    }
   }
 
-  // localStorage.getItem(data.current.value)
+  const [myList, setMyList] = useState('')
+
+  const [studentsList, setStudentList] = useState(getLocalItem())
+
+
+  const studentListHandler = (sName, sMarks) => {
+    if(myList){
+    } else{
+      setStudentList((prevList)=>{
+        return [...prevList, 
+          {studentName: sName, 
+            studentMarks: sMarks, 
+            id: Math.random().toString()
+          }]
+      })
+      setMyList('')
+    }
+    
+  }
+
+  useEffect(()=>{
+    localStorage.setItem('list', JSON.stringify(studentsList))
+  },[studentsList])
 
   return (
     <div className="App">
