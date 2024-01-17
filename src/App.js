@@ -8,7 +8,6 @@ function App() {
 
   const getLocalItem = () => {
     let lists = localStorage.getItem('list')
-    console.log(lists)
     if(lists){
       return JSON.parse(localStorage.getItem('list'))
     }
